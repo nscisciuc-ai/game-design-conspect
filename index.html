@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conspect: TI & Cultura Informațională în Game Design</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --code-bg: #0f172a;
+            --success: #4ade80;
+        }
+
+        /* Tema deschisă (light) */
+        body.light {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --accent-color: #7c3aed;
+            --accent-hover: #6d28d9;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --code-bg: #e2e8f0;
+            --success: #15803d;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--accent-color); font-size: 2.2rem; margin-bottom: 10px; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* Navigare */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+            border-color: var(--accent-color);
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        /* Bară de unelte */
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        button.toggle-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        button.toggle-btn:hover { background-color: var(--accent-hover); }
+
+        /* Timer Pomodoro */
+        .pomodoro {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pomodoro h3 { margin-top: 0; color: var(--accent-color); }
+
+        #pomodoro-display {
+            font-size: 3rem;
+            font-weight: bold;
+            font-family: monospace;
+            color: #38bdf8;
+            margin: 10px 0;
+        }
+
+        .pomodoro .info { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Secțiuni */
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        blockquote {
+            background-color: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid var(--accent-color);
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote p { margin: 5px 0; }
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: var(--accent-color);
+        }
+
+        .schema-box {
+            background-color: var(--code-bg);
+            border: 1px dashed var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: #38bdf8;
+            font-size: 1.05rem;
+            overflow-x: auto;
+        }
+
+        /* Progres autoevaluare */
+        .progress-bar {
+            background: var(--code-bg);
+            border-radius: 20px;
+            height: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-color), #38bdf8);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            line-height: 22px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Carduri întrebări */
+        .qa-card {
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .qa-card h3 { margin-top: 0; font-size: 1.05rem; }
+
+        .answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            color: var(--success);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mod printare / PDF */
+        @media print {
+            body { background: white; color: black; }
+            section { background: white; border: 1px solid #ccc; box-shadow: none; page-break-inside: avoid; }
+            h1, h2, th { color: #5b21b6; }
+            .answer { display: block !important; color: #166534; }
+            nav, .toolbar, button, .progress-bar, .pomodoro { display: none !important; }
+            .schema-box { color: #0369a1; border-color: #5b21b6; background: #f8fafc; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎮 Cultura Informațională și TI în Game Design</h1>
+        <p class="subtitle">Conspect interactiv de studiu pentru dezvoltarea jocurilor video</p>
+    </header>
+
+    <nav>
+        <a href="#s1">📌 Cultura informațională</a>
+        <a href="#s2">💻 Tehnologii (TI)</a>
+        <a href="#s3">🎯 Aplicare</a>
+        <a href="#s4">🧠 Schema</a>
+        <a href="#s5">⭐ Idei-cheie</a>
+        <a href="#s6">❓ Autoevaluare</a>
+    </nav>
+
+    <div class="toolbar">
+        <button class="toggle-btn" onclick="window.print()">🖨️ Printează / Salvează PDF</button>
+        <button class="toggle-btn" id="theme-btn" onclick="toggleTheme()">🌗 Schimbă Tema</button>
+    </div>
+
+    <!-- Timer Pomodoro -->
+    <div class="pomodoro">
+        <h3>🍅 Timer Pomodoro pentru studiu</h3>
+        <div id="pomodoro-display">25:00</div>
+        <button class="toggle-btn" id="pomodoro-start" onclick="startPomodoro()">▶️ Start</button>
+        <button class="toggle-btn" onclick="resetPomodoro()">🔄 Reset</button>
+        <p class="info">Studiază 25 de minute, apoi ia o pauză de 5 minute. Ciclul se repetă automat!</p>
+    </div>
+
+    <!-- Sectiunea 1 -->
+    <section id="s1">
+        <h2>📌 1. Cultura informațională în Game Design</h2>
+        <p><strong>Definiție:</strong> Capacitatea game designerului de a căuta, evalua, utiliza și crea informații și resurse digitale eficient și etic în procesul de dezvoltare a jocurilor.</p>
+
+        <h3>Componentele principale:</h3>
+        <ul>
+            <li>📖 <strong>Cunoașterea domeniului</strong> – înțelegerea industriei, tendințelor și a pieței de gaming.</li>
+            <li>🔍 <strong>Căutare de resurse</strong> – documentație de engines, tutoriale, GDC talks, articole de design.</li>
+            <li>⚖️ <strong>Evaluare critică</strong> – distingerea surselor de calitate de cele învechite sau eronate.</li>
+            <li>🎮 <strong>Analiza jocurilor</strong> – studiul jocurilor existente (gameplay, mecanici, design de nivel).</li>
+            <li>🛡️ <strong>Comportament etic</strong> – respectarea licențelor de asset-uri, a drepturilor de autor, evitarea „asset flipping"-ului.</li>
+        </ul>
+
+        <blockquote>
+            <p>✅ Urmărești tendințele și tehnologiile noi din industrie</p>
+            <p>✅ Eviți copierea ilegală de asset-uri, cod, muzică</p>
+            <p>✅ Apelezi corect la documentație și comunități (Stack Overflow, forumuri Unity/Unreal)</p>
+            <p>✅ Îți formezi judecată de design prin analiză comparativă</p>
+        </blockquote>
+    </section>
+
+    <!-- Sectiunea 2 -->
+    <section id="s2">
+        <h2>💻 2. Tehnologiile informaționale (TI) în Game Design</h2>
+        <p><strong>Definiție:</strong> Totalitatea instrumentelor și platformelor digitale folosite pentru crearea, testarea, optimizarea și distribuția jocurilor.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Componentă</th>
+                    <th>Exemple în Game Design</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hardware</strong></td>
+                    <td>PC-uri de gaming cu GPU puternic, console dev-kits, tablete grafice, VR headsets</td>
+                </tr>
+                <tr>
+                    <td><strong>Software</strong></td>
+                    <td>Game engines, tool-uri de modelare 3D, editoare audio</td>
+                </tr>
+                <tr>
+                    <td><strong>Rețele</strong></td>
+                    <td>Internet, cloud, servicii multiplayer, storefront-uri (Steam, Epic)</td>
+                </tr>
+                <tr>
+                    <td><strong>Baze de date</strong></td>
+                    <td>Salvări de joc, conturi de jucători, leaderboard-uri, telemetrie</td>
+                </tr>
+                <tr>
+                    <td><strong>Resurse umane</strong></td>
+                    <td>Designeri, programatori, artiști 3D, sound designeri, QA testers</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Sectiunea 3 -->
+    <section id="s3">
+        <h2>🎯 3. Aplicarea TI în Game Design</h2>
+        <h3>Instrumente-cheie:</h3>
+        <ul>
+            <li><strong>Game Engines:</strong> Unity (C#), Unreal Engine (C++, Blueprints), Godot (Open-source).</li>
+            <li><strong>Grafică și artă:</strong> Blender, Maya, 3ds Max (3D); Photoshop, Krita, Aseprite (2D); Substance Painter (PBR).</li>
+            <li><strong>Audio:</strong> Audacity, FMOD, Wwise (muzică adaptivă).</li>
+            <li><strong>Controlul versiunilor:</strong> Git, GitHub, Perforce (colaborare în echipă).</li>
+            <li><strong>Management de proiect:</strong> Trello, Jira, Notion.</li>
+            <li><strong>Testare și analiză:</strong> Unity Analytics, GameAnalytics.</li>
+        </ul>
+
+        <h3>Aplicații principale:</h3>
+        <ul>
+            <li>🛠️ <strong>Prototipare rapidă</strong> – testarea mecanicilor înainte de producție.</li>
+            <li>🌐 <strong>Distribuție</strong> – Steam, itch.io, Google Play, App Store.</li>
+            <li>👥 <strong>Comunicare în echipă</strong> – Discord, Slack, întâlniri online.</li>
+            <li>📊 <strong>Analiza datelor</strong> – îmbunătățirea gameplay-ului pe baza telemetriei.</li>
+            <li>🤖 <strong>Tehnologii emergente</strong> – VR/AR, AI (NPC-uri, generare procedurală).</li>
+        </ul>
+    </section>
+
+    <!-- Sectiunea 4 -->
+    <section id="s4">
+        <h2>🧠 4. Schema de memorare rapidă</h2>
+        <div class="schema-box">
+CULTURA INFORMAȚIONALĂ (Game Design)
+= ȘTI unde să cauți + EVALUEZI sursele + ANALIZEZI jocurile
+        ↓
+TI ÎN GAME DESIGN
+= ENGINE + ARTĂ + AUDIO + REȚELE + BAZE DE DATE
+        ↓
+APLICARE
+= PROTOTIPARE + PRODUCERE + TESTARE + DISTRIBUȚIE
+        </div>
+    </section>
+
+    <!-- Sectiunea 5 -->
+    <section id="s5">
+        <h2>⭐ 5. Idei-cheie de reținut</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Concept</th>
+                    <th>Esența în 3 cuvinte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Cultură informațională în GD</td><td>documentez, analizez, creez</td></tr>
+                <tr><td>Game engine</td><td>instrument central dezvoltare</td></tr>
+                <tr><td>Asset-uri</td><td>resurse licențiate folosite</td></tr>
+                <tr><td>Version control</td><td>siguranță și colaborare (Git)</td></tr>
+                <tr><td>Telemetrie</td><td>date jucători = feedback</td></tr>
+                <tr><td>Prototipare</td><td>testez repede, ieftin</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Sectiunea 6 (Interactiv) -->
+    <section id="s6">
+        <h2>❓ 6. Întrebări de autoevaluare (Interactiv)</h2>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+            <div class="progress-text" id="progress-text">0 / 6 răspunsuri descoperite</div>
+        </div>
+
+        <div class="qa-card">
+            <h3>1. Ce înseamnă cultura informațională pentru un game designer?</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(1)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-1">
+                Capacitatea de a găsi documentație, de a analiza critic competitorii/jocurile și de a folosi resursele (asset-uri, cod) în mod etic și legal.
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h3>2. Enumerați componentele TI într-un proiect de game design.</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(2)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-2">
+                Hardware (PC/DevKit), Software (Engines, tools 3D/2D), Rețele (Steam/Cloud), Baze de date (Telemetrie/Save-uri) și Resurse Umane (Echipa).
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h3>3. Care este rolul unui game engine? Dați 2 exemple.</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(3)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-3">
+                Este software-ul central care unifică grafica, fizica, sunetul și logica jocului. Exemple: Unity, Unreal Engine, Godot.
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h3>4. De ce este important controlul versiunilor (Git) în dezvoltare?</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(4)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-4">
+                Permite salvări de siguranță, revenirea la versiuni anterioare fără erori și lucrul simultan al mai multor developeri pe același proiect.
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h3>5. Cum ajută telemetria la îmbunătățirea unui joc?</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(5)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-5">
+                Colectează date anonime despre modul în care joacă utilizatorii (unde mor des, ce niveluri abandonează), permițând echilibrarea jocului.
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h3>6. Ce aspecte etice trebuie respectate la utilizarea asset-urilor?</h3>
+            <button class="toggle-btn" onclick="toggleAnswer(6)" aria-expanded="false">Arată Răspunsul</button>
+            <div class="answer" id="ans-6">
+                Verificarea licențelor (Creative Commons, Commercial use), creditarea autorilor și evitarea pirateriei sau plagiatului.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>📚 Conspect de studiu • Game Design • Cultura Informațională & TI</p>
+    </footer>
+</div>
+
+<script>
+    /* ---------- Autoevaluare cu progres ---------- */
+    const revealed = new Set();
+
+    function toggleAnswer(id) {
+        const answer = document.getElementById(`ans-${id}`);
+        const btn = answer.previousElementSibling;
+
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+            btn.textContent = "Arată Răspunsul";
+            btn.setAttribute("aria-expanded", "false");
+            revealed.delete(id);
+        } else {
+            answer.style.display = "block";
+            btn.textContent = "Ascunde Răspunsul";
+            btn.setAttribute("aria-expanded", "true");
+            revealed.add(id);
+        }
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const total = 6;
+        const done = revealed.size;
+        const pct = (done / total) * 100;
+        document.getElementById("progress-fill").style.width = pct + "%";
+        document.getElementById("progress-text").textContent =
+            done === total ? "🎉 Felicitări! Ai acoperit tot conspectul!" : `${done} / ${total} răspunsuri descoperite`;
+    }
+
+    /* ---------- Temă light / dark ---------- */
+    function toggleTheme() {
+        document.body.classList.toggle("light");
+        const isLight = document.body.classList.contains("light");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+    }
+
+    // Restaurează tema salvată la încărcarea paginii
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+    }
+
+    /* ---------- Timer Pomodoro ---------- */
+    let pomodoroInterval = null;
+    let secondsLeft = 25 * 60;
+    let isBreak = false;
+
+    function updateDisplay() {
+        const min = Math.floor(secondsLeft / 60);
+        const sec = secondsLeft % 60;
+        document.getElementById("pomodoro-display").textContent =
+            `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+    }
+
+    function startPomodoro() {
+        if (pomodoroInterval) {
+            // Pauză
+            clearInterval(pomodoroInterval);
+            pomodoroInterval = null;
+            document.getElementById("pomodoro-start").textContent = "▶️ Continuă";
+            return;
+        }
+        document.getElementById("pomodoro-start").textContent = "⏸️ Pauză";
+        pomodoroInterval = setInterval(() => {
+            secondsLeft--;
+            updateDisplay();
+            if (secondsLeft <= 0) {
+                clearInterval(pomodoroInterval);
+                pomodoroInterval = null;
+                // Comută între studiu și pauză
+                isBreak = !isBreak;
+                secondsLeft = isBreak ? 5 * 60 : 25 * 60;
+                document.getElementById("pomodoro-start").textContent = "▶️ Start";
+                alert(isBreak ? "🍅 Timp de pauză! 5 minute de relaxare." : "💪 Pauza s-a terminat! Înapoi la studiu: 25 minute.");
+                updateDisplay();
+            }
+        }, 1000);
+    }
+
+    function resetPomodoro() {
+        clearInterval(pomodoroInterval);
+        pomodoroInterval = null;
+        isBreak = false;
+        secondsLeft = 25 * 60;
+        document.getElementById("pomodoro-start").textContent = "▶️ Start";
+        updateDisplay();
+    }
+</script>
+
+</body>
+</html>
