@@ -21,6 +21,7 @@
             --accent-cyan: #06b6d4;
             --accent-green: #10b981;
             --accent-pink: #ec4899;
+            --accent-gold: #fbbf24;
             --text-color: #f1f5f9;
             --text-muted: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.1);
@@ -48,6 +49,44 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        /* ===== SELECTOR DE LIMBĂ (NOU) ===== */
+        .language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            gap: 4px;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 5px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        .lang-btn {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            color: var(--text-color);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            color: #fff;
         }
 
         /* HEADER */
@@ -270,6 +309,144 @@
             height: 18px;
         }
 
+        /* ===== FORMULAR FEEDBACK (NOU) ===== */
+        .feedback-form {
+            margin: 20px 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            font-size: 1.9rem;
+            cursor: pointer;
+        }
+
+        .star-rating .fa-star {
+            color: rgba(255, 255, 255, 0.2);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .star-rating .fa-star:hover {
+            transform: scale(1.2);
+        }
+
+        .star-rating .fa-star.active {
+            color: var(--accent-gold);
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+        }
+
+        .submit-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 12px 30px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .fb-status {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .fb-status.success { color: var(--accent-green); }
+        .fb-status.error { color: var(--accent-pink); }
+
+        .fb-empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .feedback-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .fb-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .fb-stars {
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+        }
+
+        .fb-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            color: var(--text-muted);
+        }
+
+        .fb-delete {
+            background: transparent;
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            color: var(--accent-pink);
+            padding: 4px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .fb-delete:hover {
+            background: rgba(236, 72, 153, 0.2);
+        }
+
         /* ANIMATIONS */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -287,80 +464,89 @@
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             section { padding: 20px; }
+            .lang-btn { padding: 5px 10px; font-size: 0.8rem; }
+            .language-switcher { top: 10px; right: 10px; }
         }
     </style>
 </head>
 <body>
 
+<!-- SELECTOR DE LIMBĂ -->
+<div class="language-switcher">
+    <button class="lang-btn active" id="btn-ro" onclick="setLanguage('ro')">🇷🇴 RO</button>
+    <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
+    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇬🇧 EN</button>
+</div>
+
 <div class="container">
 
     <header>
-        <p class="subtitle"><i class="fa-solid fa-gamepad"></i> Ghid de studiu complet</p>
-        <h1>Cultura Informației și TI în Game Design</h1>
-        <p style="color: var(--text-muted);">Informație, Tehnologie, Istorie și Structuri de Joc</p>
+        <p class="subtitle" data-i18n="subtitle"><i class="fa-solid fa-gamepad"></i> Ghid de studiu complet</p>
+        <h1 data-i18n="headerTitle">Cultura Informației și TI în Game Design</h1>
+        <p style="color: var(--text-muted);" data-i18n="headerDesc">Informație, Tehnologie, Istorie și Structuri de Joc</p>
     </header>
 
     <!-- CAPITOLUL 1 -->
     <section>
-        <h2><i class="fa-solid fa-brain"></i> CAPITOLUL 1: Cultura Informației</h2>
+        <h2><i class="fa-solid fa-brain"></i> <span data-i18n="ch1Title">CAPITOLUL 1: Cultura Informației</span></h2>
         
-        <p><strong>Cultura informației</strong> reprezintă ansamblul de cunoștințe și deprinderi necesare pentru a <strong>căuta, evalua, prelucra și utiliza</strong> informația eficient și etic.</p>
+        <p data-i18n="ch1Def"><strong>Cultura informației</strong> reprezintă ansamblul de cunoștințe și deprinderi necesare pentru a <strong>căuta, evalua, prelucra și utiliza</strong> informația eficient și etic.</p>
         
         <img class="section-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop" alt="Cultura Informatiei Digitala">
 
-        <h3>Componente principale:</h3>
+        <h3 data-i18n="ch1Components">Componente principale:</h3>
         <div class="grid-2">
             <div class="card-mini">
-                <h4>📖 Informare</h4>
-                <p>Identificarea surselor relevante și selecția datelor valide.</p>
+                <h4 data-i18n="card1Title">📖 Informare</h4>
+                <p data-i18n="card1Text">Identificarea surselor relevante și selecția datelor valide.</p>
             </div>
             <div class="card-mini">
-                <h4>💻 Competențe digitale</h4>
-                <p>Utilizarea eficientă a programelor și platformelor IT.</p>
+                <h4 data-i18n="card2Title">💻 Competențe digitale</h4>
+                <p data-i18n="card2Text">Utilizarea eficientă a programelor și platformelor IT.</p>
             </div>
             <div class="card-mini">
-                <h4>🧠 Gândire critică</h4>
-                <p>Verificarea veridicității surselor și evitarea dezinformării.</p>
+                <h4 data-i18n="card3Title">🧠 Gândire critică</h4>
+                <p data-i18n="card3Text">Verificarea veridicității surselor și evitarea dezinformării.</p>
             </div>
             <div class="card-mini">
-                <h4>🤝 Comunicare</h4>
-                <p>Colaborare etică în medii online și proiecte de echipă.</p>
+                <h4 data-i18n="card4Title">🤝 Comunicare</h4>
+                <p data-i18n="card4Text">Colaborare etică în medii online și proiecte de echipă.</p>
             </div>
         </div>
 
-        <div class="highlight-box">
+        <div class="highlight-box" data-i18n="highlight1">
             💡 <strong>Formula Game Design-ului:</strong> Arta + Tehnologie + Psihologie + Informatică
         </div>
     </section>
 
     <!-- CAPITOLUL 2 -->
     <section>
-        <h2><i class="fa-solid fa-chess-knight"></i> CAPITOLUL 2: Game Design – Definiții</h2>
+        <h2><i class="fa-solid fa-chess-knight"></i> <span data-i18n="ch2Title">CAPITOLUL 2: Game Design – Definiții</span></h2>
         
         <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
-                        <th>Termen</th>
-                        <th>Definiție pe scurt</th>
+                        <th data-i18n="tableTerm">Termen</th>
+                        <th data-i18n="tableDef">Definiție pe scurt</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>Game Design</strong></td>
-                        <td>Crearea regulilor, mecanicilor și conceptului unui joc.</td>
+                        <td data-i18n="def1">Crearea regulilor, mecanicilor și conceptului unui joc.</td>
                     </tr>
                     <tr>
                         <td><strong>Game Engine</strong></td>
-                        <td>Software-ul bază folosit pentru construirea jocului (ex: Unity, Unreal Engine).</td>
+                        <td data-i18n="def2">Software-ul bază folosit pentru construirea jocului (ex: Unity, Unreal Engine).</td>
                     </tr>
                     <tr>
                         <td><strong>Gameplay</strong></td>
-                        <td>Interacțiunea directă dintre jucător și sistemul de joc.</td>
+                        <td data-i18n="def3">Interacțiunea directă dintre jucător și sistemul de joc.</td>
                     </tr>
                     <tr>
                         <td><strong>GDD</strong></td>
-                        <td><em>Game Design Document</em> – Biblia proiectului, conține toate detaliile.</td>
+                        <td data-i18n="def4"><em>Game Design Document</em> – Biblia proiectului, conține toate detaliile.</td>
                     </tr>
                 </tbody>
             </table>
@@ -368,65 +554,65 @@
 
         <img class="section-img" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop" alt="Echipa de dezvoltare jocuri">
 
-        <h3>Echipa de Dezvoltare:</h3>
-        <p><strong>Game Designer</strong> (Concept) • <strong>Programator</strong> (Cod) • <strong>Artist/Animator</strong> (Grafică) • <strong>Sound Designer</strong> (Audio) • <strong>QA Tester</strong> (Bug-uri) • <strong>Producer</strong> (Management)</p>
+        <h3 data-i18n="teamTitle">Echipa de Dezvoltare:</h3>
+        <p data-i18n="teamText"><strong>Game Designer</strong> (Concept) • <strong>Programator</strong> (Cod) • <strong>Artist/Animator</strong> (Grafică) • <strong>Sound Designer</strong> (Audio) • <strong>QA Tester</strong> (Bug-uri) • <strong>Producer</strong> (Management)</p>
     </section>
 
     <!-- CAPITOLUL 3 -->
     <section>
-        <h2><i class="fa-solid fa-clock-rotate-left"></i> CAPITOLUL 3: Istoria Jocurilor Video</h2>
-        <p style="color: var(--accent-pink); font-weight: bold;">Cronologie esențială de memorat pentru examen!</p>
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="ch3Title">CAPITOLUL 3: Istoria Jocurilor Video</span></h2>
+        <p style="color: var(--accent-pink); font-weight: bold;" data-i18n="ch3Note">Cronologie esențială de memorat pentru examen!</p>
         
         <img class="section-img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Retro Arcade Gaming">
 
         <div class="timeline">
             <div class="timeline-item">
-                <span class="timeline-date">1958 - 1971 | Începuturile</span>
-                <p><strong>1958:</strong> <em>Tennis for Two</em> (William Higinbotham) - primul joc video.</p>
-                <p><strong>1962:</strong> <em>Spacewar!</em> (MIT) | <strong>1971:</strong> <em>Computer Space</em> (Arcade comercial).</p>
+                <span class="timeline-date" data-i18n="tl1Date">1958 - 1971 | Începuturile</span>
+                <p data-i18n="tl1a"><strong>1958:</strong> <em>Tennis for Two</em> (William Higinbotham) - primul joc video.</p>
+                <p data-i18n="tl1b"><strong>1962:</strong> <em>Spacewar!</em> (MIT) | <strong>1971:</strong> <em>Computer Space</em> (Arcade comercial).</p>
             </div>
 
             <div class="timeline-item">
-                <span class="timeline-date">1972 - 1980 | Era Arcade & Console</span>
-                <p><strong>1972:</strong> <em>Pong</em> (Atari) și Magnavox Odyssey (Ralph Baer - Părintele Consolelor).</p>
-                <p><strong>1978:</strong> <em>Space Invaders</em> | <strong>1980:</strong> <em>Pac-Man</em> | <strong>1981:</strong> <em>Donkey Kong</em> (Miyamoto).</p>
+                <span class="timeline-date" data-i18n="tl2Date">1972 - 1980 | Era Arcade & Console</span>
+                <p data-i18n="tl2a"><strong>1972:</strong> <em>Pong</em> (Atari) și Magnavox Odyssey (Ralph Baer - Părintele Consolelor).</p>
+                <p data-i18n="tl2b"><strong>1978:</strong> <em>Space Invaders</em> | <strong>1980:</strong> <em>Pac-Man</em> | <strong>1981:</strong> <em>Donkey Kong</em> (Miyamoto).</p>
             </div>
 
             <div class="timeline-item">
-                <span class="timeline-date">1983 - 1985 | Criza și Salvatorul</span>
-                <p><strong>1983:</strong> Criza jocurilor video din America (supraproducție de calitate proastă).</p>
-                <p><strong>1985:</strong> Nintendo NES + <em>Super Mario Bros.</em> salvează industria!</p>
+                <span class="timeline-date" data-i18n="tl3Date">1983 - 1985 | Criza și Salvatorul</span>
+                <p data-i18n="tl3a"><strong>1983:</strong> Criza jocurilor video din America (supraproducție de calitate proastă).</p>
+                <p data-i18n="tl3b"><strong>1985:</strong> Nintendo NES + <em>Super Mario Bros.</em> salvează industria!</p>
             </div>
 
             <div class="timeline-item">
-                <span class="timeline-date">1990 - 2000 | Era 3D</span>
-                <p><strong>1994:</strong> Lansare PlayStation (Sony) - tranziția la CD-uri.</p>
-                <p><strong>1996-1997:</strong> Nintendo 64, Tomb Raider, Quake, Final Fantasy VII.</p>
+                <span class="timeline-date" data-i18n="tl4Date">1990 - 2000 | Era 3D</span>
+                <p data-i18n="tl4a"><strong>1994:</strong> Lansare PlayStation (Sony) - tranziția la CD-uri.</p>
+                <p data-i18n="tl4b"><strong>1996-1997:</strong> Nintendo 64, Tomb Raider, Quake, Final Fantasy VII.</p>
             </div>
 
             <div class="timeline-item">
-                <span class="timeline-date">2000 - Prezent | Online, Mobile & Cloud</span>
-                <p>World of Warcraft (2004), iPhone / Jocuri Mobile (2007), Minecraft (2009), VR & Cloud Gaming (2020+).</p>
+                <span class="timeline-date" data-i18n="tl5Date">2000 - Prezent | Online, Mobile & Cloud</span>
+                <p data-i18n="tl5">World of Warcraft (2004), iPhone / Jocuri Mobile (2007), Minecraft (2009), VR & Cloud Gaming (2020+).</p>
             </div>
         </div>
     </section>
 
     <!-- CAPITOLUL 4 -->
     <section>
-        <h2><i class="fa-solid fa-laptop-code"></i> CAPITOLUL 4: Tehnologii Informaționale</h2>
+        <h2><i class="fa-solid fa-laptop-code"></i> <span data-i18n="ch4Title">CAPITOLUL 4: Tehnologii Informaționale</span></h2>
         
         <div class="grid-2">
             <div>
-                <h3>Game Engines</h3>
-                <ul>
+                <h3 data-i18n="enginesTitle">Game Engines</h3>
+                <ul data-i18n="enginesList">
                     <li><strong>Unity</strong> - Utilizează C# (Jocuri 2D, 3D, Mobile, Indie)</li>
                     <li><strong>Unreal Engine</strong> - Utilizează C++ & Blueprints (Grafică AAA)</li>
                     <li><strong>Godot</strong> - Open source, ușor și eficient</li>
                 </ul>
             </div>
             <div>
-                <h3>Tehnologii Emergente</h3>
-                <ul>
+                <h3 data-i18n="techTitle">Tehnologii Emergente</h3>
+                <ul data-i18n="techList">
                     <li><strong>Ray Tracing:</strong> Iluminare fotorealistă în timp real</li>
                     <li><strong>Procedural Generation:</strong> Generare automată (ex: Minecraft)</li>
                     <li><strong>AR/VR:</strong> Imersiune (Pokémon GO / Oculus)</li>
@@ -437,73 +623,527 @@
 
     <!-- CAPITOLUL 5: QUIZ INTERACTIV -->
     <section>
-        <h2><i class="fa-solid fa-circle-question"></i> CAPITOLUL 5: Verificarea Cunoștințelor</h2>
-        <p style="margin-bottom: 20px;">Alege răspunsul corect pentru fiecare întrebare:</p>
+        <h2><i class="fa-solid fa-circle-question"></i> <span data-i18n="ch5Title">CAPITOLUL 5: Verificarea Cunoștințelor</span></h2>
+        <p style="margin-bottom: 20px;" data-i18n="ch5Desc">Alege răspunsul corect pentru fiecare întrebare:</p>
 
         <div class="quiz-card">
-            <p><strong>1. Care este considerat primul joc video din istorie?</strong></p>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">A) Pac-Man</button>
-            <button class="quiz-option" onclick="checkQuiz(this, true)">B) Tennis for Two (1958)</button>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">C) Pong</button>
+            <p data-i18n="q1"><strong>1. Care este considerat primul joc video din istorie?</strong></p>
+            <button class="quiz-option" data-i18n="q1a" onclick="checkQuiz(this, false)">A) Pac-Man</button>
+            <button class="quiz-option" data-i18n="q1b" onclick="checkQuiz(this, true)">B) Tennis for Two (1958)</button>
+            <button class="quiz-option" data-i18n="q1c" onclick="checkQuiz(this, false)">C) Pong</button>
         </div>
 
         <div class="quiz-card">
-            <p><strong>2. Ce eveniment major a avut loc în anul 1983?</strong></p>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">A) Lansarea PlayStation 1</button>
-            <button class="quiz-option" onclick="checkQuiz(this, true)">B) Criza industriei jocurilor video</button>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">C) Apariția jocului Tetris</button>
+            <p data-i18n="q2"><strong>2. Ce eveniment major a avut loc în anul 1983?</strong></p>
+            <button class="quiz-option" data-i18n="q2a" onclick="checkQuiz(this, false)">A) Lansarea PlayStation 1</button>
+            <button class="quiz-option" data-i18n="q2b" onclick="checkQuiz(this, true)">B) Criza industriei jocurilor video</button>
+            <button class="quiz-option" data-i18n="q2c" onclick="checkQuiz(this, false)">C) Apariția jocului Tetris</button>
         </div>
 
         <div class="quiz-card">
-            <p><strong>3. Ce limbaj de programare este folosit predominant în engine-ul Unity?</strong></p>
-            <button class="quiz-option" onclick="checkQuiz(this, true)">A) C#</button>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">B) C++</button>
-            <button class="quiz-option" onclick="checkQuiz(this, false)">C) Python</button>
+            <p data-i18n="q3"><strong>3. Ce limbaj de programare este folosit predominant în engine-ul Unity?</strong></p>
+            <button class="quiz-option" data-i18n="q3a" onclick="checkQuiz(this, true)">A) C#</button>
+            <button class="quiz-option" data-i18n="q3b" onclick="checkQuiz(this, false)">B) C++</button>
+            <button class="quiz-option" data-i18n="q3c" onclick="checkQuiz(this, false)">C) Python</button>
         </div>
     </section>
 
     <!-- CAPITOLUL 6: CHECKLIST -->
     <section>
-        <h2><i class="fa-solid fa-square-check"></i> Checklist de Autoevaluare</h2>
+        <h2><i class="fa-solid fa-square-check"></i> <span data-i18n="ch6Title">Checklist de Autoevaluare</span></h2>
         
         <label class="checklist-item">
-            <input type="checkbox"> Pot enumera 3 jocuri istorice cu anii lor?
+            <input type="checkbox">
+            <span data-i18n="check1">Pot enumera 3 jocuri istorice cu anii lor?</span>
         </label>
         <label class="checklist-item">
-            <input type="checkbox"> Știu cine este Ralph Baer și ce a creat?
+            <input type="checkbox">
+            <span data-i18n="check2">Știu cine este Ralph Baer și ce a creat?</span>
         </label>
         <label class="checklist-item">
-            <input type="checkbox"> Înțeleg diferența dintre un Game Designer și un Programator?
+            <input type="checkbox">
+            <span data-i18n="check3">Înțeleg diferența dintre un Game Designer și un Programator?</span>
         </label>
         <label class="checklist-item">
-            <input type="checkbox"> Pot numi 2 Game Engine-uri principale?
+            <input type="checkbox">
+            <span data-i18n="check4">Pot numi 2 Game Engine-uri principale?</span>
         </label>
     </section>
 
+    <!-- SECȚIUNE FEEDBACK (NOU) -->
+    <section id="feedback">
+        <h2><i class="fa-solid fa-comments"></i> <span data-i18n="fbTitle">Feedback & Impresii</span></h2>
+        <p data-i18n="fbDesc">Ai parcurs tot conspectul? Lasă-ne impresiile tale!</p>
+
+        <div class="feedback-form">
+            <div class="form-group">
+                <label for="fbNameInput" data-i18n="fbName">Numele tău (opțional):</label>
+                <input type="text" id="fbNameInput" maxlength="50" data-i18n-placeholder="fbNamePlaceholder" placeholder="Ex: Ana">
+            </div>
+
+            <div class="form-group">
+                <label data-i18n="fbRating">Cum evaluezi conspectul?</label>
+                <div class="star-rating" id="starRating">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fbMessageInput" data-i18n="fbMessage">Mesajul tău:</label>
+                <textarea id="fbMessageInput" rows="4" maxlength="500" data-i18n-placeholder="fbMessagePlaceholder" placeholder="Ce ți-a plăcut? Ce poate fi îmbunătățit?"></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="submitFeedback()" data-i18n="fbSubmit">
+                <i class="fa-solid fa-paper-plane"></i> Trimite feedback
+            </button>
+            <p id="fbStatus" class="fb-status"></p>
+        </div>
+
+        <h3 data-i18n="fbListTitle">Impresii recente:</h3>
+        <div id="feedbackList"></div>
+    </section>
+
     <footer>
-        <p>Proiectat pentru studiu individual • Găzduit pe GitHub Pages</p>
+        <p data-i18n="footer">Proiectat pentru studiu individual • Găzduit pe GitHub Pages</p>
     </footer>
 
 </div>
 
 <script>
+    /* ============================================
+       SISTEM DE TRADUCERE (RO / RU / EN)
+    ============================================ */
+    const translations = {
+        ro: {
+            subtitle: '<i class="fa-solid fa-gamepad"></i> Ghid de studiu complet',
+            headerTitle: 'Cultura Informației și TI în Game Design',
+            headerDesc: 'Informație, Tehnologie, Istorie și Structuri de Joc',
+
+            ch1Title: 'CAPITOLUL 1: Cultura Informației',
+            ch1Def: '<strong>Cultura informației</strong> reprezintă ansamblul de cunoștințe și deprinderi necesare pentru a <strong>căuta, evalua, prelucra și utiliza</strong> informația eficient și etic.',
+            ch1Components: 'Componente principale:',
+            card1Title: '📖 Informare',
+            card1Text: 'Identificarea surselor relevante și selecția datelor valide.',
+            card2Title: '💻 Competențe digitale',
+            card2Text: 'Utilizarea eficientă a programelor și platformelor IT.',
+            card3Title: '🧠 Gândire critică',
+            card3Text: 'Verificarea veridicității surselor și evitarea dezinformării.',
+            card4Title: '🤝 Comunicare',
+            card4Text: 'Colaborare etică în medii online și proiecte de echipă.',
+            highlight1: '💡 <strong>Formula Game Design-ului:</strong> Arta + Tehnologie + Psihologie + Informatică',
+
+            ch2Title: 'CAPITOLUL 2: Game Design – Definiții',
+            tableTerm: 'Termen',
+            tableDef: 'Definiție pe scurt',
+            def1: 'Crearea regulilor, mecanicilor și conceptului unui joc.',
+            def2: 'Software-ul bază folosit pentru construirea jocului (ex: Unity, Unreal Engine).',
+            def3: 'Interacțiunea directă dintre jucător și sistemul de joc.',
+            def4: '<em>Game Design Document</em> – Biblia proiectului, conține toate detaliile.',
+            teamTitle: 'Echipa de Dezvoltare:',
+            teamText: '<strong>Game Designer</strong> (Concept) • <strong>Programator</strong> (Cod) • <strong>Artist/Animator</strong> (Grafică) • <strong>Sound Designer</strong> (Audio) • <strong>QA Tester</strong> (Bug-uri) • <strong>Producer</strong> (Management)',
+
+            ch3Title: 'CAPITOLUL 3: Istoria Jocurilor Video',
+            ch3Note: 'Cronologie esențială de memorat pentru examen!',
+            tl1Date: '1958 - 1971 | Începuturile',
+            tl1a: '<strong>1958:</strong> <em>Tennis for Two</em> (William Higinbotham) - primul joc video.',
+            tl1b: '<strong>1962:</strong> <em>Spacewar!</em> (MIT) | <strong>1971:</strong> <em>Computer Space</em> (Arcade comercial).',
+            tl2Date: '1972 - 1980 | Era Arcade & Console',
+            tl2a: '<strong>1972:</strong> <em>Pong</em> (Atari) și Magnavox Odyssey (Ralph Baer - Părintele Consolelor).',
+            tl2b: '<strong>1978:</strong> <em>Space Invaders</em> | <strong>1980:</strong> <em>Pac-Man</em> | <strong>1981:</strong> <em>Donkey Kong</em> (Miyamoto).',
+            tl3Date: '1983 - 1985 | Criza și Salvatorul',
+            tl3a: '<strong>1983:</strong> Criza jocurilor video din America (supraproducție de calitate proastă).',
+            tl3b: '<strong>1985:</strong> Nintendo NES + <em>Super Mario Bros.</em> salvează industria!',
+            tl4Date: '1990 - 2000 | Era 3D',
+            tl4a: '<strong>1994:</strong> Lansare PlayStation (Sony) - tranziția la CD-uri.',
+            tl4b: '<strong>1996-1997:</strong> Nintendo 64, Tomb Raider, Quake, Final Fantasy VII.',
+            tl5Date: '2000 - Prezent | Online, Mobile & Cloud',
+            tl5: 'World of Warcraft (2004), iPhone / Jocuri Mobile (2007), Minecraft (2009), VR & Cloud Gaming (2020+).',
+
+            ch4Title: 'CAPITOLUL 4: Tehnologii Informaționale',
+            enginesTitle: 'Game Engines',
+            enginesList: '<li><strong>Unity</strong> - Utilizează C# (Jocuri 2D, 3D, Mobile, Indie)</li><li><strong>Unreal Engine</strong> - Utilizează C++ & Blueprints (Grafică AAA)</li><li><strong>Godot</strong> - Open source, ușor și eficient</li>',
+            techTitle: 'Tehnologii Emergente',
+            techList: '<li><strong>Ray Tracing:</strong> Iluminare fotorealistă în timp real</li><li><strong>Procedural Generation:</strong> Generare automată (ex: Minecraft)</li><li><strong>AR/VR:</strong> Imersiune (Pokémon GO / Oculus)</li>',
+
+            ch5Title: 'CAPITOLUL 5: Verificarea Cunoștințelor',
+            ch5Desc: 'Alege răspunsul corect pentru fiecare întrebare:',
+            q1: '1. Care este considerat primul joc video din istorie?',
+            q1a: 'A) Pac-Man', q1b: 'B) Tennis for Two (1958)', q1c: 'C) Pong',
+            q2: '2. Ce eveniment major a avut loc în anul 1983?',
+            q2a: 'A) Lansarea PlayStation 1', q2b: 'B) Criza industriei jocurilor video', q2c: 'C) Apariția jocului Tetris',
+            q3: '3. Ce limbaj de programare este folosit predominant în engine-ul Unity?',
+            q3a: 'A) C#', q3b: 'B) C++', q3c: 'C) Python',
+            quizCorrect: '(Corect!)',
+            quizWrong: '(Greșit!)',
+
+            ch6Title: 'Checklist de Autoevaluare',
+            check1: 'Pot enumera 3 jocuri istorice cu anii lor?',
+            check2: 'Știu cine este Ralph Baer și ce a creat?',
+            check3: 'Înțeleg diferența dintre un Game Designer și un Programator?',
+            check4: 'Pot numi 2 Game Engine-uri principale?',
+
+            fbTitle: 'Feedback & Impresii',
+            fbDesc: 'Ai parcurs tot conspectul? Lasă-ne impresiile tale!',
+            fbName: 'Numele tău (opțional):',
+            fbNamePlaceholder: 'Ex: Ana',
+            fbRating: 'Cum evaluezi conspectul?',
+            fbMessage: 'Mesajul tău:',
+            fbMessagePlaceholder: 'Ce ți-a plăcut? Ce poate fi îmbunătățit?',
+            fbSubmit: '<i class="fa-solid fa-paper-plane"></i> Trimite feedback',
+            fbSuccess: '✅ Mulțumim pentru feedback! A fost înregistrat.',
+            fbError: '⚠️ Te rugăm să scrii un mesaj înainte de a trimite.',
+            fbListTitle: 'Impresii recente:',
+            fbEmpty: 'Încă nu există feedback. Fii primul!',
+            fbDelete: 'Șterge',
+            fbAnonymous: 'Anonim',
+            footer: 'Proiectat pentru studiu individual • Găzduit pe GitHub Pages'
+        },
+
+        ru: {
+            subtitle: '<i class="fa-solid fa-gamepad"></i> Полное учебное пособие',
+            headerTitle: 'Культура информации и ИТ в геймдизайне',
+            headerDesc: 'Информация, технологии, история и структуры игр',
+
+            ch1Title: 'ГЛАВА 1: Культура информации',
+            ch1Def: '<strong>Культура информации</strong> — это совокупность знаний и навыков, необходимых для того, чтобы <strong>искать, оценивать, обрабатывать и использовать</strong> информацию эффективно и этично.',
+            ch1Components: 'Основные компоненты:',
+            card1Title: '📖 Информирование',
+            card1Text: 'Выявление релевантных источников и отбор достоверных данных.',
+            card2Title: '💻 Цифровые компетенции',
+            card2Text: 'Эффективное использование программ и ИТ-платформ.',
+            card3Title: '🧠 Критическое мышление',
+            card3Text: 'Проверка достоверности источников и избегание дезинформации.',
+            card4Title: '🤝 Коммуникация',
+            card4Text: 'Этичное сотрудничество в онлайн-среде и командных проектах.',
+            highlight1: '💡 <strong>Формула геймдизайна:</strong> Искусство + Технологии + Психология + Информатика',
+
+            ch2Title: 'ГЛАВА 2: Геймдизайн – определения',
+            tableTerm: 'Термин',
+            tableDef: 'Краткое определение',
+            def1: 'Создание правил, механик и концепции игры.',
+            def2: 'Базовое программное обеспечение для создания игры (напр.: Unity, Unreal Engine).',
+            def3: 'Прямое взаимодействие между игроком и игровой системой.',
+            def4: '<em>Game Design Document</em> – «библия» проекта, содержит все детали.',
+            teamTitle: 'Команда разработки:',
+            teamText: '<strong>Геймдизайнер</strong> (Концепция) • <strong>Программист</strong> (Код) • <strong>Художник/Аниматор</strong> (Графика) • <strong>Саунд-дизайнер</strong> (Аудио) • <strong>QA-тестировщик</strong> (Баги) • <strong>Продюсер</strong> (Менеджмент)',
+
+            ch3Title: 'ГЛАВА 3: История видеоигр',
+            ch3Note: 'Основная хронология для запоминания на экзамене!',
+            tl1Date: '1958 - 1971 | Истоки',
+            tl1a: '<strong>1958:</strong> <em>Tennis for Two</em> (Уильям Хигинботам) — первая видеоигра.',
+            tl1b: '<strong>1962:</strong> <em>Spacewar!</em> (MIT) | <strong>1971:</strong> <em>Computer Space</em> (первый коммерческий автомат).',
+            tl2Date: '1972 - 1980 | Эпоха аркад и консолей',
+            tl2a: '<strong>1972:</strong> <em>Pong</em> (Atari) и Magnavox Odyssey (Ральф Баер — отец консолей).',
+            tl2b: '<strong>1978:</strong> <em>Space Invaders</em> | <strong>1980:</strong> <em>Pac-Man</em> | <strong>1981:</strong> <em>Donkey Kong</em> (Миямото).',
+            tl3Date: '1983 - 1985 | Кризис и спаситель',
+            tl3a: '<strong>1983:</strong> Кризис видеоигр в Америке (перепроизводство низкокачественных игр).',
+            tl3b: '<strong>1985:</strong> Nintendo NES + <em>Super Mario Bros.</em> спасают индустрию!',
+            tl4Date: '1990 - 2000 | Эпоха 3D',
+            tl4a: '<strong>1994:</strong> Выход PlayStation (Sony) — переход на CD.',
+            tl4b: '<strong>1996-1997:</strong> Nintendo 64, Tomb Raider, Quake, Final Fantasy VII.',
+            tl5Date: '2000 - Настоящее | Онлайн, мобильные и облачные игры',
+            tl5: 'World of Warcraft (2004), iPhone / Мобильные игры (2007), Minecraft (2009), VR и облачный гейминг (2020+).',
+
+            ch4Title: 'ГЛАВА 4: Информационные технологии',
+            enginesTitle: 'Игровые движки',
+            enginesList: '<li><strong>Unity</strong> — использует C# (2D, 3D, мобильные, инди-игры)</li><li><strong>Unreal Engine</strong> — использует C++ и Blueprints (AAA-графика)</li><li><strong>Godot</strong> — открытый исходный код, лёгкий и эффективный</li>',
+            techTitle: 'Новые технологии',
+            techList: '<li><strong>Трассировка лучей:</strong> Фотореалистичное освещение в реальном времени</li><li><strong>Процедурная генерация:</strong> Автоматическая генерация (напр.: Minecraft)</li><li><strong>AR/VR:</strong> Погружение (Pokémon GO / Oculus)</li>',
+
+            ch5Title: 'ГЛАВА 5: Проверка знаний',
+            ch5Desc: 'Выберите правильный ответ на каждый вопрос:',
+            q1: '1. Какая игра считается первой видеоигрой в истории?',
+            q1a: 'A) Pac-Man', q1b: 'B) Tennis for Two (1958)', q1c: 'C) Pong',
+            q2: '2. Какое важное событие произошло в 1983 году?',
+            q2a: 'A) Выход PlayStation 1', q2b: 'B) Кризис индустрии видеоигр', q2c: 'C) Появление игры Тетрис',
+            q3: '3. Какой язык программирования используется преимущественно в движке Unity?',
+            q3a: 'A) C#', q3b: 'B) C++', q3c: 'C) Python',
+            quizCorrect: '(Верно!)',
+            quizWrong: '(Неверно!)',
+
+            ch6Title: 'Чек-лист для самопроверки',
+            check1: 'Могу назвать 3 исторические игры с годами их выхода?',
+            check2: 'Знаю, кто такой Ральф Баер и что он создал?',
+            check3: 'Понимаю разницу между геймдизайнером и программистом?',
+            check4: 'Могу назвать 2 основных игровых движка?',
+
+            fbTitle: 'Отзывы и впечатления',
+            fbDesc: 'Прошли весь конспект? Оставьте свои впечатления!',
+            fbName: 'Ваше имя (необязательно):',
+            fbNamePlaceholder: 'Напр.: Анна',
+            fbRating: 'Как вы оцениваете конспект?',
+            fbMessage: 'Ваше сообщение:',
+            fbMessagePlaceholder: 'Что понравилось? Что можно улучшить?',
+            fbSubmit: '<i class="fa-solid fa-paper-plane"></i> Отправить отзыв',
+            fbSuccess: '✅ Спасибо за отзыв! Он был сохранён.',
+            fbError: '⚠️ Пожалуйста, напишите сообщение перед отправкой.',
+            fbListTitle: 'Последние отзывы:',
+            fbEmpty: 'Отзывов пока нет. Будьте первым!',
+            fbDelete: 'Удалить',
+            fbAnonymous: 'Анонимно',
+            footer: 'Создано для индивидуального обучения • Размещено на GitHub Pages'
+        },
+
+        en: {
+            subtitle: '<i class="fa-solid fa-gamepad"></i> Complete study guide',
+            headerTitle: 'Information Culture & IT in Game Design',
+            headerDesc: 'Information, Technology, History and Game Structures',
+
+            ch1Title: 'CHAPTER 1: Information Culture',
+            ch1Def: '<strong>Information culture</strong> represents the set of knowledge and skills needed to <strong>search, evaluate, process and use</strong> information efficiently and ethically.',
+            ch1Components: 'Main components:',
+            card1Title: '📖 Informing',
+            card1Text: 'Identifying relevant sources and selecting valid data.',
+            card2Title: '💻 Digital skills',
+            card2Text: 'Efficient use of IT programs and platforms.',
+            card3Title: '🧠 Critical thinking',
+            card3Text: 'Verifying source credibility and avoiding misinformation.',
+            card4Title: '🤝 Communication',
+            card4Text: 'Ethical collaboration in online environments and team projects.',
+            highlight1: '💡 <strong>The Game Design formula:</strong> Art + Technology + Psychology + Computer Science',
+
+            ch2Title: 'CHAPTER 2: Game Design – Definitions',
+            tableTerm: 'Term',
+            tableDef: 'Short definition',
+            def1: 'Creating the rules, mechanics and concept of a game.',
+            def2: 'The base software used to build the game (e.g.: Unity, Unreal Engine).',
+            def3: 'The direct interaction between the player and the game system.',
+            def4: '<em>Game Design Document</em> – the bible of the project, contains all the details.',
+            teamTitle: 'Development Team:',
+            teamText: '<strong>Game Designer</strong> (Concept) • <strong>Programmer</strong> (Code) • <strong>Artist/Animator</strong> (Graphics) • <strong>Sound Designer</strong> (Audio) • <strong>QA Tester</strong> (Bugs) • <strong>Producer</strong> (Management)',
+
+            ch3Title: 'CHAPTER 3: History of Video Games',
+            ch3Note: 'Essential timeline to memorize for the exam!',
+            tl1Date: '1958 - 1971 | The Beginnings',
+            tl1a: '<strong>1958:</strong> <em>Tennis for Two</em> (William Higinbotham) - the first video game.',
+            tl1b: '<strong>1962:</strong> <em>Spacewar!</em> (MIT) | <strong>1971:</strong> <em>Computer Space</em> (commercial arcade).',
+            tl2Date: '1972 - 1980 | Arcade & Console Era',
+            tl2a: '<strong>1972:</strong> <em>Pong</em> (Atari) and Magnavox Odyssey (Ralph Baer - Father of Consoles).',
+            tl2b: '<strong>1978:</strong> <em>Space Invaders</em> | <strong>1980:</strong> <em>Pac-Man</em> | <strong>1981:</strong> <em>Donkey Kong</em> (Miyamoto).',
+            tl3Date: '1983 - 1985 | The Crisis and the Savior',
+            tl3a: '<strong>1983:</strong> The video game crash in America (overproduction of poor quality games).',
+            tl3b: '<strong>1985:</strong> Nintendo NES + <em>Super Mario Bros.</em> save the industry!',
+            tl4Date: '1990 - 2000 | The 3D Era',
+            tl4a: '<strong>1994:</strong> PlayStation launch (Sony) - the transition to CDs.',
+            tl4b: '<strong>1996-1997:</strong> Nintendo 64, Tomb Raider, Quake, Final Fantasy VII.',
+            tl5Date: '2000 - Present | Online, Mobile & Cloud',
+            tl5: 'World of Warcraft (2004), iPhone / Mobile Games (2007), Minecraft (2009), VR & Cloud Gaming (2020+).',
+
+            ch4Title: 'CHAPTER 4: Information Technologies',
+            enginesTitle: 'Game Engines',
+            enginesList: '<li><strong>Unity</strong> - Uses C# (2D, 3D, Mobile, Indie games)</li><li><strong>Unreal Engine</strong> - Uses C++ & Blueprints (AAA Graphics)</li><li><strong>Godot</strong> - Open source, lightweight and efficient</li>',
+            techTitle: 'Emerging Technologies',
+            techList: '<li><strong>Ray Tracing:</strong> Photorealistic real-time lighting</li><li><strong>Procedural Generation:</strong> Automatic generation (e.g.: Minecraft)</li><li><strong>AR/VR:</strong> Immersion (Pokémon GO / Oculus)</li>',
+
+            ch5Title: 'CHAPTER 5: Knowledge Check',
+            ch5Desc: 'Choose the correct answer for each question:',
+            q1: '1. Which is considered the first video game in history?',
+            q1a: 'A) Pac-Man', q1b: 'B) Tennis for Two (1958)', q1c: 'C) Pong',
+            q2: '2. What major event took place in 1983?',
+            q2a: 'A) PlayStation 1 launch', q2b: 'B) The video game industry crash', q2c: 'C) The appearance of Tetris',
+            q3: '3. Which programming language is predominantly used in the Unity engine?',
+            q3a: 'A) C#', q3b: 'B) C++', q3c: 'C) Python',
+            quizCorrect: '(Correct!)',
+            quizWrong: '(Wrong!)',
+
+            ch6Title: 'Self-Assessment Checklist',
+            check1: 'I can name 3 historical games with their years?',
+            check2: 'I know who Ralph Baer is and what he created?',
+            check3: 'I understand the difference between a Game Designer and a Programmer?',
+            check4: 'I can name 2 main Game Engines?',
+
+            fbTitle: 'Feedback & Impressions',
+            fbDesc: 'Finished the whole guide? Share your impressions!',
+            fbName: 'Your name (optional):',
+            fbNamePlaceholder: 'E.g.: Anna',
+            fbRating: 'How do you rate this guide?',
+            fbMessage: 'Your message:',
+            fbMessagePlaceholder: 'What did you like? What could be improved?',
+            fbSubmit: '<i class="fa-solid fa-paper-plane"></i> Send feedback',
+            fbSuccess: '✅ Thank you for your feedback! It has been saved.',
+            fbError: '⚠️ Please write a message before submitting.',
+            fbListTitle: 'Recent feedback:',
+            fbEmpty: 'No feedback yet. Be the first!',
+            fbDelete: 'Delete',
+            fbAnonymous: 'Anonymous',
+            footer: 'Designed for individual study • Hosted on GitHub Pages'
+        }
+    };
+
+    const pageTitles = {
+        ro: 'Conspect: Cultura Informației & TI în Game Design',
+        ru: 'Конспект: Культура информации и ИТ в геймдизайне',
+        en: 'Study Guide: Information Culture & IT in Game Design'
+    };
+
+    let currentLang = 'ro';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+
+        // Traduce toate elementele cu atribut data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key] !== undefined) {
+                el.innerHTML = translations[lang][key];
+                // Dacă e un buton de quiz deja răspuns, re-adaugăm simbolul
+                if (el.classList.contains('quiz-option') && el.disabled) {
+                    if (el.classList.contains('correct')) {
+                        el.innerHTML += ' <i class="fa-solid fa-check"></i> ' + translations[lang].quizCorrect;
+                    } else if (el.classList.contains('wrong')) {
+                        el.innerHTML += ' <i class="fa-solid fa-xmark"></i> ' + translations[lang].quizWrong;
+                    }
+                }
+            }
+        });
+
+        // Traduce placeholder-ele
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
+        });
+
+        document.documentElement.lang = lang;
+        document.title = pageTitles[lang];
+        localStorage.setItem('preferredLang', lang);
+
+        // Actualizează butoanele active
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+
+        renderFeedbacks();
+    }
+
+    /* ============================================
+       QUIZ
+    ============================================ */
     function checkQuiz(button, isCorrect) {
         const parent = button.parentElement;
         const options = parent.querySelectorAll('.quiz-option');
-        
+
         options.forEach(btn => {
             btn.disabled = true;
             btn.style.cursor = 'default';
         });
 
+        const t = translations[currentLang];
         if (isCorrect) {
             button.classList.add('correct');
-            button.innerHTML += ' <i class="fa-solid fa-check"></i> (Corect!)';
+            button.innerHTML += ' <i class="fa-solid fa-check"></i> ' + t.quizCorrect;
         } else {
             button.classList.add('wrong');
-            button.innerHTML += ' <i class="fa-solid fa-xmark"></i> (Greșit!)';
+            button.innerHTML += ' <i class="fa-solid fa-xmark"></i> ' + t.quizWrong;
         }
     }
+
+    /* ============================================
+       SISTEM DE FEEDBACK (salvat în browser - localStorage)
+    ============================================ */
+    let currentRating = 0;
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function getFeedbacks() {
+        try {
+            return JSON.parse(localStorage.getItem('conspectFeedbacks') || '[]');
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function initStars() {
+        const stars = document.querySelectorAll('#starRating .fa-star');
+        stars.forEach(star => {
+            star.addEventListener('mouseenter', () => highlightStars(parseInt(star.dataset.value)));
+            star.addEventListener('mouseleave', () => highlightStars(currentRating));
+            star.addEventListener('click', () => {
+                currentRating = parseInt(star.dataset.value);
+                highlightStars(currentRating);
+            });
+        });
+    }
+
+    function highlightStars(count) {
+        document.querySelectorAll('#starRating .fa-star').forEach((star, i) => {
+            star.classList.toggle('active', i < count);
+        });
+    }
+
+    function submitFeedback() {
+        const name = document.getElementById('fbNameInput').value.trim();
+        const message = document.getElementById('fbMessageInput').value.trim();
+        const status = document.getElementById('fbStatus');
+        const t = translations[currentLang];
+
+        if (!message) {
+            status.textContent = t.fbError;
+            status.className = 'fb-status error';
+            return;
+        }
+
+        const feedbacks = getFeedbacks();
+        feedbacks.unshift({
+            name: name || t.fbAnonymous,
+            rating: currentRating,
+            message: message,
+            date: new Date().toLocaleString(currentLang === 'ro' ? 'ro-RO' : currentLang === 'ru' ? 'ru-RU' : 'en-GB')
+        });
+        localStorage.setItem('conspectFeedbacks', JSON.stringify(feedbacks));
+
+        // Resetează formularul
+        document.getElementById('fbNameInput').value = '';
+        document.getElementById('fbMessageInput').value = '';
+        currentRating = 0;
+        highlightStars(0);
+        status.textContent = t.fbSuccess;
+        status.className = 'fb-status success';
+        renderFeedbacks();
+    }
+
+    function renderFeedbacks() {
+        const list = document.getElementById('feedbackList');
+        const feedbacks = getFeedbacks();
+        const t = translations[currentLang];
+
+        if (feedbacks.length === 0) {
+            list.innerHTML = '<p class="fb-empty">' + t.fbEmpty + '</p>';
+            return;
+        }
+
+        list.innerHTML = feedbacks.map((fb, index) => `
+            <div class="feedback-item">
+                <div class="fb-header">
+                    <strong>${escapeHtml(fb.name)}</strong>
+                    <span class="fb-stars">${'★'.repeat(fb.rating)}${'☆'.repeat(5 - fb.rating)}</span>
+                </div>
+                <p>${escapeHtml(fb.message)}</p>
+                <div class="fb-meta">
+                    <small>${escapeHtml(fb.date)}</small>
+                    <button class="fb-delete" onclick="deleteFeedback(${index})">${t.fbDelete}</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function deleteFeedback(index) {
+        const feedbacks = getFeedbacks();
+        feedbacks.splice(index, 1);
+        localStorage.setItem('conspectFeedbacks', JSON.stringify(feedbacks));
+        renderFeedbacks();
+    }
+
+    /* Inițializare la încărcarea paginii */
+    initStars();
+    renderFeedbacks();
+    setLanguage(localStorage.getItem('preferredLang') || 'ro');
 </script>
 
 </body>
